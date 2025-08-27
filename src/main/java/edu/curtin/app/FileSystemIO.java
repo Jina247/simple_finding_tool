@@ -2,36 +2,56 @@ package edu.curtin.app;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class FileSystemIO {
     private static final Logger log = Logger.getLogger(FileSystemIO.class.getName());
 
-    public FileSystemItem readFileSystem(String dirPath) {
-        File dir = new File(dirPath);
+    public FileSystemItem readFileSystem(String rootPath) {
+        File dir = new File(rootPath);
+
         if (!dir.exists()) {
-            System.out.println("Directory path not found");
+            log.warning("Directory path not found");
             return null;
         }
 
         if (!dir.isDirectory()) {
-            System.out.println("Path isn't a directory");
+            log.warning("The path isn't a directory");
             return null;
         }
 
-        File[] files = dir.listFiles();
+        Directory root = new Directory(dir.getName());
+        Map<String, Directory> directoryMap = new HashMap<>();
+        directoryMap.put(rootPath, root);
+        buildStructure(dir, root, directoryMap);
+        return root;
+    }
 
-        if (files == null || files.length == 0) {
-            System.out.println("No files found in: " + dirPath);
-            return null;
+    public void buildStructure(File file, Directory directory, Map<String, Directory> directoryMap) {
+        File[] children = file.listFiles();
+
+        if (children != null) {
+            for (File child : children) {
+                if (child.isDirectory()) {
+                    Directory subDirectory = new Directory(child.getName());
+                    directoryMap.put(child.getAbsolutePath(), subDirectory);
+                    directory.addItem(subDirectory);
+                    buildStructure(child, subDirectory, directoryMap);
+                } else {
+                    FileItem fileItem = buildFile(child);
+                    directory.addItem(fileItem);
+                }
+            }
         }
-        return null;
     }
 
     public FileItem buildFile(File file) {
         String name = file.getName();
         List<String> content = new ArrayList<>();
+
         try (var reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
 
@@ -42,10 +62,5 @@ public class FileSystemIO {
             log.info("Failed to to read file" + name);
         }
         return new FileItem(name, content);
-    }
-
-    public Directory buildDirStructure(Directory directory) {
-
-        return null;
     }
 }

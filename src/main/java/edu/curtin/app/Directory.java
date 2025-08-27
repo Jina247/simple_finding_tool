@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Directory implements FileSystemItem {
-    private final List<FileSystemItem> items;
+    private final List<FileSystemItem> items = new ArrayList<>();
     private final String name;
 
-    public Directory(List<FileSystemItem> items, String name) {
-        this.items = new ArrayList<>();
+    public Directory(String name) {
         this.name = name;
+    }
+
+    public void addItem(FileSystemItem item) {
+        items.add(item);
     }
 
     @Override
@@ -24,6 +27,10 @@ public class Directory implements FileSystemItem {
 
     @Override
     public int calcLine() {
-        return 0;
+        int size = 0;
+        for (FileSystemItem item: this.items) {
+            size += item.calcLine();
+        }
+        return size;
     }
 }
