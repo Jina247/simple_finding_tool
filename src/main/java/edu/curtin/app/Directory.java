@@ -15,6 +15,10 @@ public class Directory implements FileSystemItem {
         items.add(item);
     }
 
+    public List<FileSystemItem> getChildren() {
+        return new ArrayList<FileSystemItem>(items);
+    }
+
     @Override
     public String getName() {
         return this.name;
@@ -22,7 +26,19 @@ public class Directory implements FileSystemItem {
 
     @Override
     public void generateReport(String indent, List<Criterion> criteria, Report reportType) {
+        if (reportType instanceof CountReport) {
+            int totalLines = calcLine();
+            System.out.println(indent + getName() + ": " + totalLines + " lines");
 
+            for (FileSystemItem item : this.items) {
+                item.generateReport(indent + " ", criteria, reportType);
+            }
+        } else if (reportType instanceof ShowReport) {
+            System.out.println(indent + getName());
+            for (FileSystemItem item : items) {
+                item.generateReport(indent + " ", criteria, reportType);
+            }
+        }
     }
 
     @Override

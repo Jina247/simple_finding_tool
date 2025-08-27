@@ -53,9 +53,9 @@ public class FileSystemIO {
         List<String> content = new ArrayList<>();
 
         try (var reader = new BufferedReader(new FileReader(file))) {
-            String line = reader.readLine();
+            String line;
 
-            while (line != null) {
+            while ((line = reader.readLine()) != null) {
                 content.add(line);
             }
         } catch (IOException e) {
