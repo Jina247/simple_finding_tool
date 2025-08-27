@@ -6,11 +6,10 @@ import java.util.List;
 public class FileItem implements FileSystemItem {
     private final String name;
     private final List<String> content = new ArrayList<>();
-    private final int size;
 
-    public FileItem(String name, int size) {
+    public FileItem(String name, List<String> content) {
         this.name = name;
-        this.size = size;
+        this.content.addAll(content);
     }
 
     @Override
@@ -30,6 +29,6 @@ public class FileItem implements FileSystemItem {
 
     @Override
     public int calcLine() {
-        return 0;
+        return content.size();
     }
 }
