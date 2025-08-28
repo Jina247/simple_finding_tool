@@ -11,26 +11,31 @@ import java.util.logging.Logger;
  */
 public class App {
     private static final Logger log = Logger.getLogger(App.class.getName());
+    private static List<Criterion> curCriteria = getDefaultCriterion();
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         String dirPath = (args.length < 1)
                 ? FileSystems.getDefault().getPath(".").toString()
                 : args[0];
 
         FileSystemIO fileSystemIO = new FileSystemIO();
-        fileSystemIO.readFileSystem(dirPath);
+        FileSystemItem root = fileSystemIO.readFileSystem(dirPath);
         System.out.println("Reading: " + dirPath);
 
         Report countReport = new CountReport();
         List<Criterion> criteria = new ArrayList<>();
-        countReport.generate(fileSystemIO.readFileSystem(dirPath), criteria);
+        countReport.generate(root, criteria);
 
         Report showReport = new ShowReport();
-        showReport.generate(fileSystemIO.readFileSystem(dirPath), criteria);
+        showReport.generate(root, criteria);
     }
 
-    public static void readCriteria(Scanner sc) {
-        List<String> inputArr = new ArrayList<>();
+    public static List<Criterion> readCriteria(Scanner sc) {
+        List<String> inputLines = new ArrayList<>();
+        List<Criterion> criteriaList = new ArrayList<>();
+
         System.out.println("Enter search criteria (one per line, blank line to finish):");
         System.out.println("Format: [+/-] [t/r] [search pattern]");
         System.out.println("  + = include, - = exclude");
@@ -45,9 +50,10 @@ public class App {
             if (input.isEmpty()) {
                 break;
             }
-            inputArr.add(input);
+            inputLines.add(input);
         }
-        for (String line : inputArr) {
+
+        for (String line : inputLines) {
             try {
                 String[] parts = line.split(" ", 3);
                 if (parts.length != 3) {
@@ -56,7 +62,7 @@ public class App {
                     continue;
                 }
                 String flag = parts[0].trim();
-                String criteria = parts[1].trim();
+                String criteriaType = parts[1].trim();
                 String searchPattern = parts[2].trim();
 
                 if (!(flag.equals("+")) && !(flag.equals("-"))) {
@@ -65,7 +71,7 @@ public class App {
                     continue;
                 }
 
-                if (!(criteria.equals("t")) && !(criteria.equals("r"))) {
+                if (!(criteriaType.equals("t")) && !(criteriaType.equals("r"))) {
                     System.err.println("Invalid format: Second part must be start with 't' or 'r'");
                     log.warning("Invalid format");
                     continue;
@@ -77,12 +83,41 @@ public class App {
                     continue;
                 }
 
+                boolean isInclude = flag.equals("+"); // Defines isInclude is "+"
+                Criterion criterion;
 
+                if (criteriaType.equals("t")) {
+                    criterion = new TextCriterion(isInclude, searchPattern);
+                } else {
+                    criterion = new RegexCriterion(isInclude, searchPattern);
+                }
+                criteriaList.add(criterion);
             } catch (Exception e) {
                 System.err.println("Error parsing line" + line + e.getMessage());
             }
-
         }
+
+        if (criteriaList.isEmpty()) {
+            System.out.println("No criteria entered. Use the default criteria");
+            return null;
+        }
+
+        return criteriaList;
+    }
+
+    public static List<Criterion> getDefaultCriterion () {
+        List<Criterion> defaultCriterion = new ArrayList<>();
+        Criterion criterion = new RegexCriterion(true, ".*");
+        defaultCriterion.add(criterion);
+        return defaultCriterion;
+    }
+
+    public static void printMenu() {
+        System.out.println();
+        System.out.println("a. Set Criteria");
+        System.out.println("b. Set Output Format");
+        System.out.println("c. Report");
+        System.out.println("d. Quit");
     }
 
 }
