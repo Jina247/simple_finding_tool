@@ -9,11 +9,11 @@ public abstract class Criterion {
         this.pattern = pattern;
     }
 
-    protected abstract boolean matched(String line);
-
-    public boolean matching(String line) {
+    public final boolean matching(String line) {
         return matched(line);
     }
+
+    protected abstract boolean matched(String line);
     public boolean isInclude() { return include;}
     public boolean isExclude() { return !(include);}
 }

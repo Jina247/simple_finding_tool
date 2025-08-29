@@ -24,19 +24,64 @@ public class FileItem implements FileSystemItem {
     @Override
     public void generateReport(String indent, List<Criterion> criteria, Report reportType) {
         if (reportType instanceof CountReport) {
-            int matchingLines = calcLine();
+            int matchingLines = countLineMatching(criteria);
             System.out.println(indent + getName()  + ": " + matchingLines + " lines");
         } else if (reportType instanceof ShowReport) {
-            List<String> content = getContent();
-            System.out.println(indent + getName());
-            for (int i = 0; i < content.size(); i++) {
-                System.out.println(indent + " " + (i + 1) + " " + content.get(i));
-            }
+            showLineMatching(indent, criteria);
         }
     }
 
     @Override
     public int calcLine() {
         return content.size();
+    }
+
+    private boolean lineMatching(String line, List<Criterion> criteria) {
+        if (criteria.isEmpty()) {
+            return true;
+        }
+
+        for (Criterion criterion : criteria) {
+            boolean lineMatches = criterion.matching(line);
+            if (criterion.isInclude()) {
+                if (!lineMatches) {
+                    return false;
+                }
+            } else {
+                if (lineMatches) {
+                    return false;
+                }
+            }
+        }
+        /* Pass all the requirements */
+        return true;
+    }
+    @Override
+    public int countLineMatching(List<Criterion> criteria) {
+        int count = 0;
+        for (String line : content) {
+            if (lineMatching(line, criteria)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public void showLineMatching(String indent, List<Criterion> criteria) {
+        int count = 0;
+        boolean found = false;
+        
+        System.out.println(getName());
+        for (String line : this.content) {
+            count++;
+            if (lineMatching(line, criteria)) {
+                found = true;
+                System.out.println(indent + "   " + count + " " + line);
+            }
+        }
+        if (!found) {
+            System.out.println("No matching lines found.");
+        }
     }
 }

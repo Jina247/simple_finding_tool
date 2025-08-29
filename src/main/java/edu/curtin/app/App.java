@@ -24,12 +24,10 @@ public class App {
         FileSystemItem root = fileSystemIO.readFileSystem(dirPath);
         System.out.println("Reading: " + dirPath);
 
-        Report countReport = new CountReport();
-        List<Criterion> criteria = new ArrayList<>();
-        countReport.generate(root, criteria);
+        while (true) {
+            printMenu();
 
-        Report showReport = new ShowReport();
-        showReport.generate(root, criteria);
+        }
     }
 
     public static List<Criterion> readCriteria(Scanner sc) {
@@ -113,7 +111,7 @@ public class App {
     }
 
     public static void printMenu() {
-        System.out.println();
+        System.out.println("Select one option in the following options");
         System.out.println("a. Set Criteria");
         System.out.println("b. Set Output Format");
         System.out.println("c. Report");

@@ -6,5 +6,6 @@ public interface FileSystemItem {
     String getName();
     void generateReport(String indent, List<Criterion> criteria, Report reportType);
     int calcLine();
-
+    int countLineMatching(List<Criterion> criteria);
+    void showLineMatching(String indent, List<Criterion> criteria);
 }

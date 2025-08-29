@@ -11,22 +11,22 @@ public class FileSystemIO {
     private static final Logger log = Logger.getLogger(FileSystemIO.class.getName());
 
     public FileSystemItem readFileSystem(String rootPath) {
-        File dir = new File(rootPath);
+        File file = new File(rootPath);
 
-        if (!dir.exists()) {
+        if (!file.exists()) {
             log.warning("Directory path not found");
             return null;
         }
 
-        if (!dir.isDirectory()) {
+        if (!file.isDirectory()) {
             log.warning("The path isn't a directory");
             return null;
         }
 
-        Directory root = new Directory(dir.getName());
+        Directory root = new Directory(file.getName());
         Map<String, Directory> directoryMap = new HashMap<>();
         directoryMap.put(rootPath, root);
-        buildStructure(dir, root, directoryMap);
+        buildStructure(file, root, directoryMap);
         return root;
     }
 
