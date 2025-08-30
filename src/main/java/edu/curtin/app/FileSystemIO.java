@@ -59,7 +59,7 @@ public class FileSystemIO {
                 content.add(line);
             }
         } catch (IOException e) {
-            log.info("Failed to to read file" + name);
+            System.err.println("Failed to read file" + name);
         }
         return new FileItem(name, content);
     }

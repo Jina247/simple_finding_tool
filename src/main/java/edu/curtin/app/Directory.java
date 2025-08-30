@@ -2,6 +2,7 @@ package edu.curtin.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
 public class Directory implements FileSystemItem {
     private final List<FileSystemItem> items = new ArrayList<>();
@@ -29,13 +30,12 @@ public class Directory implements FileSystemItem {
         if (reportType instanceof CountReport) {
             int totalLines = countLineMatching(criteria);
             System.out.println(indent + getName() + ": " + totalLines + " lines");
-
-            for (FileSystemItem item : this.items) {
-                item.generateReport(indent + "    ", criteria, reportType);
-            }
         } else if (reportType instanceof ShowReport) {
             System.out.println(indent + getName());
             showLineMatching(indent, criteria);
+        }
+        for (FileSystemItem item : this.items) {
+            item.generateReport(indent + "    ", criteria, reportType);
         }
     }
 
@@ -49,19 +49,15 @@ public class Directory implements FileSystemItem {
     }
 
     @Override
-    public int countLineMatching(List<Criterion> critera) {
+    public int countLineMatching(List<Criterion> criteria) {
         int count = 0;
         for (FileSystemItem item : this.items) {
-            count += item.countLineMatching(critera);
+            count += item.countLineMatching(criteria);
         }
         return count;
     }
 
     @Override
     public void showLineMatching(String indent, List<Criterion> criteria) {
-        System.out.println(getName());
-        for (FileSystemItem item : this.items) {
-            item.showLineMatching(indent + "    ", criteria);
-        }
     }
 }

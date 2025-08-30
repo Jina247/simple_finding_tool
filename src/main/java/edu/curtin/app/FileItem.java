@@ -59,7 +59,7 @@ public class FileItem implements FileSystemItem {
     @Override
     public int countLineMatching(List<Criterion> criteria) {
         int count = 0;
-        for (String line : content) {
+        for (String line : this.content) {
             if (lineMatching(line, criteria)) {
                 count++;
             }
@@ -69,19 +69,19 @@ public class FileItem implements FileSystemItem {
 
     @Override
     public void showLineMatching(String indent, List<Criterion> criteria) {
-        int count = 0;
-        boolean found = false;
-        
-        System.out.println(getName());
+        int lineNumber = 0;
+        boolean isMatching = false;
+
+        System.out.println(indent + getName());
         for (String line : this.content) {
-            count++;
+            lineNumber++;
             if (lineMatching(line, criteria)) {
-                found = true;
-                System.out.println(indent + "   " + count + " " + line);
+                System.out.println(indent + "   " + lineNumber + " " + line);
+                isMatching = true;
             }
         }
-        if (!found) {
-            System.out.println("No matching lines found.");
+        if (!isMatching) {
+            System.out.println(indent + "No matching lines found.");
         }
     }
 }
