@@ -2,7 +2,6 @@ package edu.curtin.app;
 
 import java.nio.file.FileSystems;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -11,18 +10,28 @@ import java.util.logging.Logger;
  * Entry point into the application.
  */
 public class App {
-    private static final Logger log = Logger.getLogger(App.class.getName());
     private static List<Criterion> curCriteria = getDefaultCriterion();
+    private static final Logger log = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) {
+        log.info("Application started");
         try (Scanner sc = new Scanner(System.in)) {
-            String dirPath = (args[0] == null)
+            String dirPath = (args.length < 1)
                     ? FileSystems.getDefault().getPath(".").toString()
                     : args[0];
+            log.info(() -> "Loading directory: " + dirPath);
+
             FileSystemIO fileSystemIO = new FileSystemIO();
             FileSystemItem root = fileSystemIO.readFileSystem(dirPath);
+
+            if (root == null) {
+                log.severe(()-> "Failed to load directory: " + dirPath);
+                System.err.println("Failed to load directory: " + dirPath);
+                return;
+            }
             System.out.println("Reading: " + dirPath);
             Report curReport = new CountReport();
+            log.info(() -> "Default output format: Count ");
 
             while (true) {
                 printMenu();
@@ -43,11 +52,13 @@ public class App {
                             case "1":
                                 curReport = new CountReport();
                                 System.out.println("Report type: Counting report");
+                                log.info(()-> "Report type to 'count'");
                                 break;
 
                             case "2":
                                 curReport = new ShowReport();
                                 System.out.println("Report type: Showing report");
+                                log.info(()-> "Report type to 'show'");
                                 break;
 
                             default:
@@ -67,8 +78,6 @@ public class App {
                         System.out.printf("Invalid option '%s\n'", option);
                 }
             }
-        } catch (InputMismatchException e) {
-            throw new InputMismatchException("Invalid input" + e.getMessage());
         }
     }
 
@@ -99,7 +108,6 @@ public class App {
                 String[] parts = line.trim().split(" ", 3);
                 if (parts.length != 3) {
                     System.err.println("Invalid format. Format: [+/-] [t/r] [search pattern]");
-                    log.warning("Invalid format");
                     continue;
                 }
 
@@ -109,19 +117,16 @@ public class App {
 
                 if (!(flag.equals("+")) && !(flag.equals("-"))) {
                     System.err.println("Invalid format: Must be start with '+' or '-'");
-                    log.warning("Invalid format");
                     continue;
                 }
 
                 if (!(criteriaType.equals("t")) && !(criteriaType.equals("r"))) {
                     System.err.println("Invalid format: Second part must be start with 't' or 'r'");
-                    log.warning("Invalid format");
                     continue;
                 }
 
                 if (searchPattern.trim().isEmpty()) {
                     System.err.println("Invalid format: Search pattern cannot be empty");
-                    log.warning("Invalid format");
                     continue;
                 }
 
@@ -138,7 +143,6 @@ public class App {
                 System.err.println("Error parsing line" + line + e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.err.println("Invalid arguments for criterion in line '" + line + "': " + e.getMessage());
-                log.warning("Invalid criterion arguments: " + e.getMessage());
             }
         }
 

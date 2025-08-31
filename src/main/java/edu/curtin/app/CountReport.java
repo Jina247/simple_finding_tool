@@ -8,6 +8,7 @@ public class CountReport implements Report {
         if (item != null) {
             item.generateReport("", criteria, this);
         } else {
+            System.err.println("Couldn't read file");
             throw new IllegalArgumentException("File is null");
         }
     }

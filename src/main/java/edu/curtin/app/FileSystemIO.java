@@ -5,21 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class FileSystemIO {
-    private static final Logger log = Logger.getLogger(FileSystemIO.class.getName());
 
     public FileSystemItem readFileSystem(String rootPath) {
         File file = new File(rootPath);
 
         if (!file.exists()) {
-            log.warning("Directory path not found");
+            System.err.println("Directory is not found");
             return null;
         }
 
         if (!file.isDirectory()) {
-            log.warning("The path isn't a directory");
+            System.err.println("This is not found");
             return null;
         }
 
