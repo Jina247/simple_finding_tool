@@ -2,7 +2,6 @@ package edu.curtin.app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 
 public class Directory implements FileSystemItem {
     private final List<FileSystemItem> items = new ArrayList<>();
@@ -16,10 +15,6 @@ public class Directory implements FileSystemItem {
         items.add(item);
     }
 
-    public List<FileSystemItem> getChildren() {
-        return new ArrayList<>(items);
-    }
-
     @Override
     public String getName() {
         return this.name;
@@ -27,13 +22,7 @@ public class Directory implements FileSystemItem {
 
     @Override
     public void generateReport(String indent, List<Criterion> criteria, Report reportType) {
-        if (reportType instanceof CountReport) {
-            int totalLines = countLineMatching(criteria);
-            System.out.println(indent + getName() + ": " + totalLines + " lines");
-        } else if (reportType instanceof ShowReport) {
-            System.out.println(indent + getName());
-            showLineMatching(indent, criteria);
-        }
+        reportType.reportDirectory(this, indent, criteria);
         for (FileSystemItem item : this.items) {
             item.generateReport(indent + "    ", criteria, reportType);
         }

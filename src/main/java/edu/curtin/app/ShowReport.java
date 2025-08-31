@@ -11,4 +11,14 @@ public class ShowReport implements Report {
             throw new IllegalArgumentException("File is null");
         }
     }
+
+    @Override
+    public void reportFile(FileItem file, String indent, List<Criterion> criteria) {
+        file.showLineMatching(indent, criteria);
+    }
+
+    @Override
+    public void reportDirectory(Directory dir, String indent, List<Criterion> criteria) {
+        System.out.println(indent + dir.getName());
+    }
 }

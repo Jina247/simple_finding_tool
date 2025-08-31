@@ -23,12 +23,7 @@ public class FileItem implements FileSystemItem {
 
     @Override
     public void generateReport(String indent, List<Criterion> criteria, Report reportType) {
-        if (reportType instanceof CountReport) {
-            int matchingLines = countLineMatching(criteria);
-            System.out.println(indent + getName()  + ": " + matchingLines + " lines");
-        } else if (reportType instanceof ShowReport) {
-            showLineMatching(indent, criteria);
-        }
+        reportType.reportFile(this, indent, criteria);
     }
 
     @Override

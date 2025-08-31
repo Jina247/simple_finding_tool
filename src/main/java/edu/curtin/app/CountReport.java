@@ -11,4 +11,16 @@ public class CountReport implements Report {
             throw new IllegalArgumentException("File is null");
         }
     }
+
+    @Override
+    public void reportFile(FileItem file, String indent, List<Criterion> criteria) {
+        int count = file.countLineMatching(criteria);
+        System.out.println(indent + file.getName() + " :" + count + " lines");
+    }
+
+    @Override
+    public void reportDirectory(Directory dir, String indent, List<Criterion> criteria) {
+        int totalLines = dir.countLineMatching(criteria);
+        System.out.println(indent + dir.getName() + ": " + totalLines + " lines");
+    }
 }
