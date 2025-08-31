@@ -11,15 +11,10 @@ public class FileItem implements FileSystemItem {
         this.name = name;
         this.content.addAll(content);
     }
-
-    public List<String> getContent() {
-        return content;
-    }
+    public List<String> getContent() { return new ArrayList<>(content); }
 
     @Override
-    public String getName() {
-        return this.name;
-    }
+    public String getName() { return this.name; }
 
     @Override
     public void generateReport(String indent, List<Criterion> criteria, Report reportType) {
@@ -31,26 +26,6 @@ public class FileItem implements FileSystemItem {
         return content.size();
     }
 
-    private boolean lineMatching(String line, List<Criterion> criteria) {
-        if (criteria.isEmpty()) {
-            return true;
-        }
-
-        for (Criterion criterion : criteria) {
-            boolean lineMatches = criterion.matching(line);
-            if (criterion.isInclude()) {
-                if (!lineMatches) {
-                    return false;
-                }
-            } else {
-                if (lineMatches) {
-                    return false;
-                }
-            }
-        }
-        /* Pass all the requirements */
-        return true;
-    }
     @Override
     public int countLineMatching(List<Criterion> criteria) {
         int count = 0;
@@ -62,7 +37,6 @@ public class FileItem implements FileSystemItem {
         return count;
     }
 
-    @Override
     public void showLineMatching(String indent, List<Criterion> criteria) {
         int lineNumber = 0;
         boolean isMatching = false;
@@ -78,5 +52,23 @@ public class FileItem implements FileSystemItem {
         if (!isMatching) {
             System.out.println(indent + "No matching lines found.");
         }
+    }
+
+    private boolean lineMatching(String line, List<Criterion> criteria) {
+        if (criteria.isEmpty()) {
+            return true;
+        }
+
+        for (Criterion criterion : criteria) {
+            boolean lineMatches = criterion.matching(line);
+            if (criterion.isInclude() && !lineMatches) {
+                return false;
+
+            } else if (criterion.isExclude() && lineMatches) {
+                return false;
+            }
+        }
+        /* Pass all the requirements */
+        return true;
     }
 }
