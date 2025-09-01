@@ -16,12 +16,13 @@ public abstract class Criterion {
     /**
      * Public method to check if a line matches this criterion.
      * 
-     * @param line The line to check.
-     * @return true if the line matches the pattern.
+     * @param line The line to check
+     * @return true if the line matches the pattern
      */
     public final boolean matching(String line) {
         return matched(line);
     }
+
     /**
      * Abstract method implemented by subclasses to define matching logic.
      * 

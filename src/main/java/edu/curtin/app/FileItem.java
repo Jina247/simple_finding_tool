@@ -15,7 +15,6 @@ public class FileItem implements FileSystemItem {
         this.name = name;
         this.content.addAll(content);
     }
-    public List<String> getContent() { return new ArrayList<>(content); }
 
     @Override
     public String getName() { return this.name; }
@@ -49,8 +48,8 @@ public class FileItem implements FileSystemItem {
 
     /**
      * Displays all lines that match the criteria with line numbers.
-     * @param indent Indicates the amount of spacing.
-     * @param criteria A list of criteria to apply.
+     * @param indent Indicates the amount of spacing
+     * @param criteria A list of criteria to apply
      */
     public void showLineMatching(String indent, List<Criterion> criteria) {
         int lineNumber = 0;
@@ -73,9 +72,9 @@ public class FileItem implements FileSystemItem {
      * Checks if a line matches all the given criteria.
      * All include criteria must match and no exclude criteria can match.
      * 
-     * @param line The line to test.
-     * @param criteria List of criteria to apply.
-     * @return true if line matches all criteria.
+     * @param line The line to test
+     * @param criteria List of criteria to apply
+     * @return true if line matches all criteria
      */
     private boolean lineMatching(String line, List<Criterion> criteria) {
         if (criteria.isEmpty()) {

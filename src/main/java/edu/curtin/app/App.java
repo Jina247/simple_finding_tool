@@ -32,6 +32,7 @@
                     System.err.println("Failed to load directory: " + dirPath);
                     return;
                 }
+
                 System.out.println("Reading: " + dirPath);
                 Report curReport = new CountReport();
                 log.info(() -> "Default output format set to 'Count Report' ");

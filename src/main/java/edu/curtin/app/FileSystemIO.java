@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -16,7 +13,8 @@ import java.util.logging.Logger;
  */
 public class FileSystemIO {
     private static final Logger log = Logger.getLogger(FileSystemIO.class.getName());
-    private Map<String, Directory> directoryMap = new HashMap<>();
+    private final Map<String, Directory> directoryMap = new HashMap<>();
+    public Set<String>  textFile = Set.of("txt", "java", "py", "c", "cpp", "cs", "xml", "json", "md", "html", "css", "js");
 
     /**
      * Reads a directory structure and creates a FileSystemItem tree.
@@ -42,7 +40,7 @@ public class FileSystemIO {
         Directory root = new Directory(file.getName());
         directoryMap.put(rootPath, root);
         buildStructure(file, root);
-        log.info(() -> "Buiding directory structure successfully.");
+        log.info(() -> "Building directory structure successfully.");
         return root;
     }
 
@@ -51,7 +49,6 @@ public class FileSystemIO {
      * 
      * @param file Current file/directory being processed
      * @param directory Parent directory to add items to
-     * @param directoryMap Map tracking created directories
      */
     public void buildStructure(File file, Directory directory) {
         File[] children = file.listFiles();
@@ -63,7 +60,7 @@ public class FileSystemIO {
                     directoryMap.put(child.getAbsolutePath(), subDirectory);
                     directory.addItem(subDirectory);
                     buildStructure(child, subDirectory);
-                } else {
+                } else if (child.isFile() && isTextFile(child)){
                     FileItem fileItem = buildFile(child);
                     directory.addItem(fileItem);
                 }
@@ -95,4 +92,19 @@ public class FileSystemIO {
         }
         return new FileItem(name, content);
     }
+
+    /**
+     * Checks whether files in the given directory are text-readable files.
+     * @param file File to check
+     */
+    public boolean isTextFile(File file) {
+        String name = file.getName().toLowerCase();
+        int dot = name.lastIndexOf('.');
+        if (dot == -1 || dot == name.length() - 1) {
+            return false;
+        }
+        String extension = name.substring(dot + 1);
+        return textFile.contains(extension);
+    }
+
 }

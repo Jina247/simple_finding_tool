@@ -1,8 +1,14 @@
-Sept 01, 2025 10:23:04 AM edu.curtin.app.App main
+Sept 01, 2025 8:57:32 PM edu.curtin.app.App main
 INFO: Application started
-Sept 01, 2025 10:23:04 AM edu.curtin.app.App main
+Sept 01, 2025 8:57:32 PM edu.curtin.app.App main
 INFO: Loading directory: .
-Sept 01, 2025 10:23:04 AM edu.curtin.app.App main
-INFO: Default output format: Count 
-Sept 01, 2025 10:24:41 AM edu.curtin.app.App main
-INFO: Report type to 'count'
+Sept 01, 2025 8:57:32 PM edu.curtin.app.FileSystemIO readFileSystem
+INFO: Building directory structure successfully.
+Sept 01, 2025 8:57:32 PM edu.curtin.app.App main
+INFO: Default output format set to 'Count Report' 
+Sept 01, 2025 8:57:36 PM edu.curtin.app.App main
+FINE: User selected option: a
+Sept 01, 2025 8:57:43 PM edu.curtin.app.App main
+FINE: User selected option: c
+Sept 01, 2025 8:57:55 PM edu.curtin.app.App main
+FINE: User selected option: d
