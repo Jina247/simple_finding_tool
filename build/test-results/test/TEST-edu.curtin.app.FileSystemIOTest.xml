@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.curtin.app.FileSystemIOTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-09-01T08:08:24" hostname="jinuMacPro.local" time="0.005">
+  <properties/>
+  <testcase name="Should handle non-existent directory" classname="edu.curtin.app.FileSystemIOTest" time="0.001"/>
+  <testcase name="Should read directory structure correctly" classname="edu.curtin.app.FileSystemIOTest" time="0.002"/>
+  <testcase name="Should handle file instead of directory" classname="edu.curtin.app.FileSystemIOTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Sept 01, 2025 4:08:24 PM edu.curtin.app.FileSystemIO readFileSystem
+SEVERE: Directory is not found: /non/existent/path
+Directory is not found
+Sept 01, 2025 4:08:24 PM edu.curtin.app.FileSystemIO readFileSystem
+INFO: Buiding directory structure successfully.
+Sept 01, 2025 4:08:24 PM edu.curtin.app.FileSystemIO readFileSystem
+SEVERE: Path is not a directory: /var/folders/ld/mfd0_vgd5jdfvt74t13kb3sm0000gn/T/junit15887127241158910197/testfile.txt
+This is not found
+]]></system-err>
+</testsuite>

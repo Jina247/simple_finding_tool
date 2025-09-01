@@ -84,6 +84,7 @@ public class FileItem implements FileSystemItem {
 
         for (Criterion criterion : criteria) {
             boolean lineMatches = criterion.matching(line);
+
             if (criterion.isInclude() && !lineMatches) {
                 return false;
 

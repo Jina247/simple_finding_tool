@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.curtin.app.PerformanceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-01T08:08:24" hostname="jinuMacPro.local" time="0.047">
+  <properties/>
+  <testcase name="Should handle large directory structures efficiently" classname="edu.curtin.app.PerformanceTest" time="0.047"/>
+  <system-out><![CDATA[=== Performance Test: Large Directory Structure ===
+Creating large Java project for performance testing...
+✓ Large project structure created
+Load time: 5ms
+Total lines: 2650
+Search time: 20ms
+Matching lines: 450
+✓ Performance test passed
+]]></system-out>
+  <system-err><![CDATA[Sept 01, 2025 4:08:24 PM edu.curtin.app.FileSystemIO readFileSystem
+INFO: Buiding directory structure successfully.
+]]></system-err>
+</testsuite>

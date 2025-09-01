@@ -18,7 +18,9 @@ public class Directory implements FileSystemItem {
     public void addItem(FileSystemItem item) {
         items.add(item);
     }
-
+    public List<FileSystemItem> getItems() {
+        return new ArrayList<>(items);
+    }
     @Override
     public String getName() {
         return this.name;
