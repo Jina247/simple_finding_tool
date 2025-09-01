@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.curtin.app.AppTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-01T08:08:24" hostname="jinuMacPro.local" time="0.007">
+  <properties/>
+  <testcase name="Should create default criterion correctly" classname="edu.curtin.app.AppTest" time="0.001"/>
+  <testcase name="Should validate flag parsing logic specifically" classname="edu.curtin.app.AppTest" time="0.0"/>
+  <testcase name="Should handle empty criteria input" classname="edu.curtin.app.AppTest" time="0.003"/>
+  <testcase name="Should parse valid criteria input" classname="edu.curtin.app.AppTest" time="0.001"/>
+  <system-out><![CDATA[Enter search criteria (one per line, blank line to finish):
+Format: [+/-] [t/r] [search pattern]
+  + = include, - = exclude
+  t = text search, r = regex search
+Examples:
+  + t class
+  - r \d+
+
+No criteria entered. Use the default criteria
+Enter search criteria (one per line, blank line to finish):
+Format: [+/-] [t/r] [search pattern]
+  + = include, - = exclude
+  t = text search, r = regex search
+Examples:
+  + t class
+  - r \d+
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

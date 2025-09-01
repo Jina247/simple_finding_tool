@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.curtin.app.CompleteIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-01T08:08:24" hostname="jinuMacPro.local" time="0.014">
+  <properties/>
+  <testcase name="End-to-end test with realistic Java project" classname="edu.curtin.app.CompleteIntegrationTest" time="0.014"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Sept 01, 2025 4:08:24 PM edu.curtin.app.FileSystemIO readFileSystem
+INFO: Buiding directory structure successfully.
+]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.curtin.app.FileItemTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-01T08:08:24" hostname="jinuMacPro.local" time="0.001">
+  <properties/>
+  <testcase name="FileItem should handle multiple criteria" classname="edu.curtin.app.FileItemTest" time="0.0"/>
+  <testcase name="FileItem should count matching lines correctly" classname="edu.curtin.app.FileItemTest" time="0.001"/>
+  <testcase name="FileItem should handle empty criteria" classname="edu.curtin.app.FileItemTest" time="0.0"/>
+  <testcase name="FileItem should store content correctly" classname="edu.curtin.app.FileItemTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

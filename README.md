@@ -1,7 +1,7 @@
-Base Java Project
+Simple Finding Tool - OOSE Assignment 1
 =================
 
-This is a [Gradle][]-based Java project structure. Provided you have the [OpenJDK][] installed, the `gradlew` script will take care of all other dependencies.
+This is a [Gradle][]-based Java project structure adopted from base_java_project via oasis/Blackboard.
 
 [Java]: https://docs.oracle.com/javase/tutorial/
 [Gradle]: https://gradle.org/

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.curtin.app.ErrorHandlingTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-09-01T08:08:24" hostname="jinuMacPro.local" time="0.003">
+  <properties/>
+  <testcase name="Should handle malformed regex patterns" classname="edu.curtin.app.ErrorHandlingTest" time="0.001"/>
+  <testcase name="Should handle invalid criteria format gracefully" classname="edu.curtin.app.ErrorHandlingTest" time="0.002"/>
+  <system-out><![CDATA[Enter search criteria (one per line, blank line to finish):
+Format: [+/-] [t/r] [search pattern]
+  + = include, - = exclude
+  t = text search, r = regex search
+Examples:
+  + t class
+  - r \d+
+
+No criteria entered. Use the default criteria
+]]></system-out>
+  <system-err><![CDATA[Sept 01, 2025 4:08:24 PM edu.curtin.app.App readCriteria
+WARNING: Invalid format. Format: [+/-] [t/r] [search pattern]
+Sept 01, 2025 4:08:24 PM edu.curtin.app.App readCriteria
+WARNING: Invalid format: invalid
+Sept 01, 2025 4:08:24 PM edu.curtin.app.App readCriteria
+WARNING: Invalid format: *
+Sept 01, 2025 4:08:24 PM edu.curtin.app.App readCriteria
+WARNING: Invalid format. Format: [+/-] [t/r] [search pattern]
+]]></system-err>
+</testsuite>
