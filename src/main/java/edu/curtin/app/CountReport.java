@@ -2,6 +2,9 @@ package edu.curtin.app;
 
 import java.util.List;
 
+/**
+ * Report that shows the count of matching lines for each file and directory.
+ */
 public class CountReport implements Report {
     @Override
     public void generate(FileSystemItem item, List<Criterion> criteria) {
