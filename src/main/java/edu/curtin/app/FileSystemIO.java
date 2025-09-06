@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class FileSystemIO {
     private static final Logger log = Logger.getLogger(FileSystemIO.class.getName());
     private final Map<String, Directory> directoryMap = new HashMap<>();
-    public Set<String>  textFile = Set.of("txt", "java", "py", "c", "cpp", "cs", "xml", "json", "md", "html", "css", "js");
+    public Set<String>  textFile = Set.of("build", "gradle", ".gradle");
 
     /**
      * Reads a directory structure and creates a FileSystemItem tree.
@@ -60,7 +60,7 @@ public class FileSystemIO {
                     directoryMap.put(child.getAbsolutePath(), subDirectory);
                     directory.addItem(subDirectory);
                     buildStructure(child, subDirectory);
-                } else if (child.isFile() && isTextFile(child)){
+                } else if (child.isFile() && !(isTextFile(child))){
                     FileItem fileItem = buildFile(child);
                     directory.addItem(fileItem);
                 }
@@ -99,12 +99,7 @@ public class FileSystemIO {
      */
     public boolean isTextFile(File file) {
         String name = file.getName().toLowerCase();
-        int dot = name.lastIndexOf('.');
-        if (dot == -1 || dot == name.length() - 1) {
-            return false;
-        }
-        String extension = name.substring(dot + 1);
-        return textFile.contains(extension);
+        return textFile.contains(name);
     }
 
 }

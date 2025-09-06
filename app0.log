@@ -1,14 +1,28 @@
-Sept 01, 2025 8:57:32 PM edu.curtin.app.App main
+Sept 06, 2025 6:38:07 PM edu.curtin.app.App main
 INFO: Application started
-Sept 01, 2025 8:57:32 PM edu.curtin.app.App main
+Sept 06, 2025 6:38:07 PM edu.curtin.app.App main
 INFO: Loading directory: .
-Sept 01, 2025 8:57:32 PM edu.curtin.app.FileSystemIO readFileSystem
+Sept 06, 2025 6:38:07 PM edu.curtin.app.FileSystemIO readFileSystem
 INFO: Building directory structure successfully.
-Sept 01, 2025 8:57:32 PM edu.curtin.app.App main
+Sept 06, 2025 6:38:07 PM edu.curtin.app.App main
 INFO: Default output format set to 'Count Report' 
-Sept 01, 2025 8:57:36 PM edu.curtin.app.App main
-FINE: User selected option: a
-Sept 01, 2025 8:57:43 PM edu.curtin.app.App main
+Sept 06, 2025 6:38:12 PM edu.curtin.app.App main
 FINE: User selected option: c
-Sept 01, 2025 8:57:55 PM edu.curtin.app.App main
+Sept 06, 2025 6:38:26 PM edu.curtin.app.App main
+FINE: User selected option: b
+Sept 06, 2025 6:38:29 PM edu.curtin.app.App main
+INFO: Report type to 'show'
+Sept 06, 2025 6:38:30 PM edu.curtin.app.App main
+FINE: User selected option: c
+Sept 06, 2025 6:39:55 PM edu.curtin.app.App main
+FINE: User selected option: [?6cb
+Sept 06, 2025 6:40:00 PM edu.curtin.app.App main
+FINE: User selected option: [?6c
+Sept 06, 2025 6:40:03 PM edu.curtin.app.App main
+FINE: User selected option: b
+Sept 06, 2025 6:40:09 PM edu.curtin.app.App main
+INFO: Report type to 'count'
+Sept 06, 2025 6:40:14 PM edu.curtin.app.App main
+FINE: User selected option: c
+Sept 06, 2025 6:40:56 PM edu.curtin.app.App main
 FINE: User selected option: d
